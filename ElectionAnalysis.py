@@ -1,3 +1,24 @@
+# Election analysis app
+# Allows the user to analyse the 2024 UK general election
+
+
+# Classes
+
+class Constituency:
+    '''Constituency Class'''
+    def __init__(self,name,region,country,type):
+        self.cName = name
+        self.cRegion = region
+        self.cCountry = country
+        self.cType = type
+        self.description = {'Country name':self.cCountry,'Region name':self.cRegion,'Constituency Type':self.cType}
+        
+    def __str__(self):
+        return self.cName
+    def GetDescription(self):
+        return self.description 
+        
+    
 MainOptions = ['List the MPs', 'List the constituencies', 'List the Parties']
 
 # Main Menu
