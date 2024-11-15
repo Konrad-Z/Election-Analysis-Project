@@ -1,6 +1,8 @@
 # Election analysis app
 # Allows the user to analyse the 2024 UK general election
 
+# imports
+import csv
 
 # Classes
 
@@ -45,6 +47,7 @@ class Party:
         self.pTotalvalid = totalvalid
         self.pTotalinvalid = totalinvalid
         self.pProportion = propotion
+
         self.pDetails = {'Total MPs': self.pTotalMPs,'New MPs': self.pNewMPs,'Total Electorate':self.pTotalelectorate,'Total Valid':self.pTotalvalid,'Total Invalid':self.pTotalinvalid,'Proportion':self.pProportion}
 
     def __str__(self):
@@ -52,6 +55,30 @@ class Party:
     def GetPartyDetails(self):
         return self.pDetails
 
+
+def read_file():
+    list = []
+    with open('FullDataFor2024.csv') as csvfile:
+        reader = csv.DictReader(csvfile)
+        
+        for row in reader:
+            list.append(row)
+        return list
+
+
+def manage(data):
+    Constituency_dict = {}
+    for row in data:
+        cname = row['Constituency name']
+        
+        if cname not in Constituency_dict:
+            Constituency_dict[cname] = Constituency()
+            Constituency = Constituency(cname)
+
+    print(Constituency)
+
+csv = read_file()
+print(csv[0])
 
 MainOptions = ['List the MPs', 'List the constituencies', 'List the Parties']
 
@@ -65,3 +92,4 @@ optionNumber = 0
 for option in MainOptions:
     print(optionNumber, '\t', option)
     optionNumber += 1
+
