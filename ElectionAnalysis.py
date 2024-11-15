@@ -35,6 +35,14 @@ class MP:
     def GetMPDetails(self):
         return self.mpDetails
 
+class Party:
+    '''Party class'''
+    def __init__(self,totalMPs,NewMPs,totalelectorate,totalvalid,totalinvalid,propotion):
+        self.pTotalMPs = totalMPs
+        self.pNewMPs = NewMPs
+
+
+
 MainOptions = ['List the MPs', 'List the constituencies', 'List the Parties']
 
 # Main Menu
