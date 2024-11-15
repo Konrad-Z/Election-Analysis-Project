@@ -31,7 +31,8 @@ class MP:
         self.mpDetails = {'First name': self.mpFirstname,'Surname': self.mpSurname,'Gender': self.mpGender,'Party': self.mpParty}
 
     def __str__(self):
-        return
+        return 
+
     def GetMPDetails(self):
         return self.mpDetails
 
@@ -40,7 +41,16 @@ class Party:
     def __init__(self,totalMPs,NewMPs,totalelectorate,totalvalid,totalinvalid,propotion):
         self.pTotalMPs = totalMPs
         self.pNewMPs = NewMPs
+        self.pTotalelectorate = totalelectorate
+        self.pTotalvalid = totalvalid
+        self.pTotalinvalid = totalinvalid
+        self.pProportion = propotion
+        self.pDetails = {'Total MPs': self.pTotalMPs,'New MPs': self.pNewMPs,'Total Electorate':self.pTotalelectorate,'Total Valid':self.pTotalvalid,'Total Invalid':self.pTotalinvalid,'Proportion':self.pProportion}
 
+    def __str__(self):
+        return
+    def GetPartyDetails(self):
+        return self.pDetails
 
 
 MainOptions = ['List the MPs', 'List the constituencies', 'List the Parties']
