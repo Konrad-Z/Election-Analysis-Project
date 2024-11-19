@@ -57,28 +57,14 @@ class Party:
 
 
 def read_file():
-    list = []
-    with open('FullDataFor2024.csv') as csvfile:
-        reader = csv.DictReader(csvfile)
-        
-        for row in reader:
-            list.append(row)
-        return list
+    '''Reading CSV'''
+    csvfile = open('FullDataFor2024.csv', 'r+')
+    reader = csv.DictReader(csvfile)
+    return reader
+    csvfile.close()
 
 
-def manage(data):
-    Constituency_dict = {}
-    for row in data:
-        cname = row['Constituency name']
-        
-        if cname not in Constituency_dict:
-            Constituency_dict[cname] = Constituency()
-            Constituency = Constituency(cname)
 
-    print(Constituency)
-
-csv = read_file()
-print(csv[0])
 
 MainOptions = ['List the MPs', 'List the constituencies', 'List the Parties']
 
