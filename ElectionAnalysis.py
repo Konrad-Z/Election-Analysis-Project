@@ -63,9 +63,6 @@ def read_file():
     return reader
     csvfile.close()
 
-
-
-
 MainOptions = ['List the MPs', 'List the constituencies', 'List the Parties']
 
 # Main Menu
