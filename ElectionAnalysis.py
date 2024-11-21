@@ -13,10 +13,10 @@ class Constituency:
         self.cRegion = region
         self.cCountry = country
         self.cType = type
-        self.description = {'Country name':self.cCountry,'Region name':self.cRegion,'Constituency Type':self.cType}
+        
         
     def __str__(self):
-        return self
+        return f"Constituency name: {self.cName:<40}Region name: {self.cRegion:<40}Country name: {self.cCountry:<40}Constituency type: {self.cType:<40}"
     def GetDescription(self):
         return self.description 
         
@@ -69,8 +69,9 @@ def manage_data():
     Constituencies = []
     for row in csvfile:
         constituency = Constituency(name = row['Constituency name'],region=row['Region name'],country=row['Country name'],type=row['Constituency type'])
-        print(constituency)
         Constituencies.append(constituency)
+        print(constituency)
+    
     
 
 manage_data()
