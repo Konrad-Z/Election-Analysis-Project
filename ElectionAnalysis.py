@@ -63,6 +63,19 @@ def read_file():
     return reader
     csvfile.close()
 
+
+def manage_data():
+    csvfile = read_file()
+    Constituencies = []
+    for row in csvfile:
+        constituency = Constituency(name = row['Constituency name'],region=row['Region name'],country=row['Country name'],type=row['Constituency type'])
+        Constituencies.append(constituency)
+    
+
+
+
+
+
 MainOptions = ['List the MPs', 'List the constituencies', 'List the Parties']
 
 # Main Menu
