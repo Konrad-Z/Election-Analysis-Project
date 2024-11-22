@@ -39,7 +39,8 @@ class MP:
 
 class Party:
     '''Party class'''
-    def __init__(self,totalMPs,NewMPs,totalelectorate,totalvalid,totalinvalid,propotion):
+    def __init__(self,party,totalMPs,NewMPs,totalelectorate,totalvalid,totalinvalid,propotion):
+        self.pParty = party
         self.pTotalMPs = totalMPs
         self.pNewMPs = NewMPs
         self.pTotalelectorate = totalelectorate
@@ -67,9 +68,14 @@ def manage_data():
     csvfile = read_file()
     Constituencies = []
     MPs = []
+    Parties = []
+
     for row in csvfile:
         constituency = Constituency(name = row['Constituency name'],region=row['Region name'],country=row['Country name'],type=row['Constituency type'])
-        mp = MP(firstname=row['Member first name'],surname=row['Member surname'],gender=row['Member gender'],party=row['First party'],electorate=row['Electorate'],validvotes=int(row['Valid votes']),invalidvotes=int(row['Invalid votes']))
+        mp = MP(firstname=row['Member first name'],surname=row['Member surname'],gender=row['Member gender'],party=row['First party'],electorate=int(row['Electorate'].replace(",", "")),validvotes=int(row['Valid votes'].replace(",", "")),invalidvotes=int(row['Invalid votes'].replace(",", "")))
+
+        
+
         Constituencies.append(constituency)
         MPs.append(mp)
         
