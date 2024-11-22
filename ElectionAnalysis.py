@@ -14,11 +14,10 @@ class Constituency:
         self.cCountry = country
         self.cType = type
         
-        
     def __str__(self):
         return f"Constituency name: {self.cName:<40}Region name: {self.cRegion:<40}Country name: {self.cCountry:<40}Constituency type: {self.cType:<40}"
-    def GetDescription(self):
-        return self.description 
+
+        
         
 class MP:
     '''Member of Parliament class'''
@@ -67,10 +66,14 @@ def read_file():
 def manage_data():
     csvfile = read_file()
     Constituencies = []
+    MPs = []
     for row in csvfile:
         constituency = Constituency(name = row['Constituency name'],region=row['Region name'],country=row['Country name'],type=row['Constituency type'])
+        mp = MP(firstname=row['Member first name'],surname=row['Member surname'],gender=row['Member gender'],party=row['First party'],electorate=row['Electorate'],validvotes=int(row['Valid votes']),invalidvotes=int(row['Invalid votes']))
         Constituencies.append(constituency)
-        print(constituency)
+        MPs.append(mp)
+        
+
     
     
 
