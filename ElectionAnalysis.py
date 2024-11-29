@@ -10,7 +10,7 @@ class Constituency:
     '''Constituency class'''
     def __init__(self,name,region,country,type):
         self.cName = name
-        self.cRegion = region
+        self.__cRegion = region
         self.cCountry = country
         self.cType = type
         
@@ -39,9 +39,9 @@ class MP:
 
 class Party:
     '''Party class'''
-    def __init__(self,party,totalMPs,NewMPs,totalelectorate,totalvalid,totalinvalid,propotion):
+    def __init__(self,party,NewMPs,totalelectorate,totalvalid,totalinvalid,propotion):
         self.pParty = party
-        self.pTotalMPs = totalMPs
+        self.pTotalMPs = 0
         self.pNewMPs = NewMPs
         self.pTotalelectorate = totalelectorate
         self.pTotalvalid = totalvalid
@@ -50,6 +50,11 @@ class Party:
 
         self.pDetails = {'Total MPs': self.pTotalMPs,'New MPs': self.pNewMPs,'Total Electorate':self.pTotalelectorate,'Total Valid':self.pTotalvalid,'Total Invalid':self.pTotalinvalid,'Proportion':self.pProportion}
 
+    def setTotalmps(self,totalmps):
+        self.pTotalMPs = totalmps
+
+    def getTotalmps(self):
+        return self.pTotalMPs
     def __str__(self):
         return
     def GetPartyDetails(self):
@@ -69,18 +74,20 @@ def manage_data():
     Constituencies = []
     MPs = []
     Parties = []
-
+    totalmps = 0
     for row in csvfile:
         constituency = Constituency(name = row['Constituency name'],region=row['Region name'],country=row['Country name'],type=row['Constituency type'])
         mp = MP(firstname=row['Member first name'],surname=row['Member surname'],gender=row['Member gender'],party=row['First party'],electorate=int(row['Electorate'].replace(",", "")),validvotes=int(row['Valid votes'].replace(",", "")),invalidvotes=int(row['Invalid votes'].replace(",", "")))
-
-        
-
         Constituencies.append(constituency)
         MPs.append(mp)
-        
-
     
+    for row in MPs:
+        party = row['First party']
+        totalmps += 1
+    Party.setTotalmps(totalmps)
+
+    TotalMPs = Party.getTotalmps()
+    print(TotalMPs)
     
 
 manage_data()
