@@ -39,9 +39,10 @@ class MP:
 
 class Party:
     '''Party class'''
+    TotalMPs = 0
+
     def __init__(self,party,NewMPs,totalelectorate,totalvalid,totalinvalid,propotion):
         self.pParty = party
-        self.pTotalMPs = 0
         self.pNewMPs = NewMPs
         self.pTotalelectorate = totalelectorate
         self.pTotalvalid = totalvalid
@@ -50,11 +51,11 @@ class Party:
 
         self.pDetails = {'Total MPs': self.pTotalMPs,'New MPs': self.pNewMPs,'Total Electorate':self.pTotalelectorate,'Total Valid':self.pTotalvalid,'Total Invalid':self.pTotalinvalid,'Proportion':self.pProportion}
 
-    def setTotalmps(self,totalmps):
-        self.pTotalMPs = totalmps
+    def setTotalmps(totalmps):
+        Party.TotalMPs = totalmps
 
-    def getTotalmps(self):
-        return self.pTotalMPs
+    def getTotalmps():
+        return Party.TotalMPs
     def __str__(self):
         return
     def GetPartyDetails(self):
@@ -82,7 +83,6 @@ def manage_data():
         MPs.append(mp)
     
     for row in MPs:
-        party = row['First party']
         totalmps += 1
     Party.setTotalmps(totalmps)
 
