@@ -9,27 +9,27 @@ import csv
 class Constituency:
     '''Constituency class'''
     def __init__(self,name,region,country,type):
-        self.cName = name
+        self.__cName = name
         self.__cRegion = region
-        self.cCountry = country
-        self.cType = type
+        self.__cCountry = country
+        self.__cType = type
         
     def __str__(self):
-        return f"Constituency name: {self.cName:<40}Region name: {self.cRegion:<40}Country name: {self.cCountry:<40}Constituency type: {self.cType:<40}"
+        return f"Constituency name: {self.__cName:<40}Region name: {self.__cRegion:<40}Country name: {self.__cCountry:<40}Constituency type: {self.__cType:<40}"
 
         
         
 class MP:
     '''Member of Parliament class'''
     def __init__(self,firstname,surname,gender,party,electorate,validvotes,invalidvotes):   
-        self.mpFirstname = firstname
-        self.mpSurname = surname
-        self.mpGender = gender
-        self.mpParty = party
-        self.mpElectorate = electorate
-        self.mpValidvotes = validvotes
-        self.mpInvalidvotes = invalidvotes
-        self.mpDetails = {'First name': self.mpFirstname,'Surname': self.mpSurname,'Gender': self.mpGender,'Party': self.mpParty}
+        self.__mpFirstname = firstname
+        self.__mpSurname = surname
+        self.__mpGender = gender
+        self.__mpParty = party
+        self.__mpElectorate = electorate
+        self.__mpValidvotes = validvotes
+        self.__mpInvalidvotes = invalidvotes
+        self.__mpDetails = {'First name': self.__mpFirstname,'Surname': self.__mpSurname,'Gender': self.__mpGender,'Party': self.__mpParty}
 
     def __str__(self):
         return 
@@ -39,27 +39,28 @@ class MP:
 
 class Party:
     '''Party class'''
-    TotalMPs = 0
+    __TotalMPs = 0
 
     def __init__(self,party,NewMPs,totalelectorate,totalvalid,totalinvalid,propotion):
-        self.pParty = party
-        self.pNewMPs = NewMPs
-        self.pTotalelectorate = totalelectorate
-        self.pTotalvalid = totalvalid
-        self.pTotalinvalid = totalinvalid
-        self.pProportion = propotion
+        self.__pParty = party
+        self.__pNewMPs = NewMPs
+        self.__pTotalelectorate = totalelectorate
+        self.__pTotalvalid = totalvalid
+        self.__pTotalinvalid = totalinvalid
+        self.__pProportion = propotion
 
-        self.pDetails = {'Total MPs': self.pTotalMPs,'New MPs': self.pNewMPs,'Total Electorate':self.pTotalelectorate,'Total Valid':self.pTotalvalid,'Total Invalid':self.pTotalinvalid,'Proportion':self.pProportion}
-
-    def setTotalmps(totalmps):
-        Party.TotalMPs = totalmps
+        
 
     def getTotalmps():
-        return Party.TotalMPs
+        return Party.__TotalMPs
+    
+    def setTotalmps(totalmps):
+        Party.__TotalMPs = totalmps
+
+    
     def __str__(self):
         return
-    def GetPartyDetails(self):
-        return self.pDetails
+    
 
 
 def read_file():
