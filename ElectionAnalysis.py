@@ -82,9 +82,11 @@ def manage_data():
         mp = MP(firstname=row['Member first name'],surname=row['Member surname'],gender=row['Member gender'],party=row['First party'],electorate=int(row['Electorate'].replace(",", "")),validvotes=int(row['Valid votes'].replace(",", "")),invalidvotes=int(row['Invalid votes'].replace(",", "")))
         Constituencies.append(constituency)
         MPs.append(mp)
-    
-    for row in MPs:
+        
         totalmps += 1
+    
+    
+        
     Party.setTotalmps(totalmps)
 
     TotalMPs = Party.getTotalmps()
