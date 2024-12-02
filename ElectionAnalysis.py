@@ -13,7 +13,7 @@ class Constituency:
         self.__cRegion = region
         self.__cCountry = country
         self.__cType = type
-            
+        
 class MP:
     '''Member of Parliament class'''
     def __init__(self,firstname,surname,gender,party,electorate,validvotes,invalidvotes):   
@@ -25,17 +25,21 @@ class MP:
         self.__mpValidvotes = validvotes
         self.__mpInvalidvotes = invalidvotes
 
+    
+
 class Party:
     '''Party class'''
-    __TotalMPs = 0
-
-    def __init__(self,party,NewMPs,totalelectorate,totalvalid,totalinvalid,propotion):
-        self.__pParty = party
-        self.__pNewMPs = NewMPs
-        self.__pTotalelectorate = totalelectorate
-        self.__pTotalvalid = totalvalid
-        self.__pTotalinvalid = totalinvalid
-        self.__pProportion = propotion
+    __pTotalMPs = 0
+    __pParties = []
+    
+    
+    def Get_totalMPs():
+        return Party.__pTotalMPs
+    
+    
+    def Set_totalMPs(totalmps):
+        Party.__pTotalMPs = totalmps 
+    
 
     
 
@@ -61,7 +65,9 @@ def manage_data():
         
         totalmps += 1
     
+    Party.Set_totalMPs(totalmps)
     
+    print(Party.Get_totalMPs())
         
     
     
