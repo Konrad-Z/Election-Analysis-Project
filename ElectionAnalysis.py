@@ -157,8 +157,7 @@ def manage_data():
         totalmps += 1
     
     Party._totalMPs = totalmps
-    
-   
+
     print(Party._totalMPs)
     
     
