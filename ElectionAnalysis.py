@@ -13,7 +13,41 @@ class Constituency:
         self.__cRegion = region
         self.__cCountry = country
         self.__cType = type
+
+    @property
+    def _cName(self):
+        return self.__cName
+
+    @_cName.setter
+    def _cName(self, value):
+        self.__cName = value
+
+    @property
+    def _cRegion(self):
+        return self.__cRegion
+
+    @_cRegion.setter
+    def _cRegion(self, value):
+        self.__cRegion = value
+
+    @property
+    def _cCountry(self):
+        return self.__cCountry
+
+    @_cCountry.setter
+    def _cCountry(self, value):
+        self.__cCountry = value
+
+    @property
+    def _cType(self):
+        return self.__cType
+
+    @_cType.setter
+    def _cType(self, value):
+        self.__cType = value
+
         
+    
 class MP:
     '''Member of Parliament class'''
     def __init__(self,firstname,surname,gender,party,electorate,validvotes,invalidvotes):   
@@ -25,6 +59,63 @@ class MP:
         self.__mpValidvotes = validvotes
         self.__mpInvalidvotes = invalidvotes
 
+    @property
+    def _mpFirstname(self):
+        return self.__mpFirstname
+
+    @_mpFirstname.setter
+    def _mpFirstname(self, value):
+        self.__mpFirstname = value
+
+    @property
+    def _mpSurname(self):
+        return self.__mpSurname
+
+    @_mpSurname.setter
+    def _mpSurname(self, value):
+        self.__mpSurname = value
+
+    @property
+    def _mpGender(self):
+        return self.__mpGender
+
+    @_mpGender.setter
+    def _mpGender(self, value):
+        self.__mpGender = value
+
+    @property
+    def _mpParty(self):
+        return self.__mpParty
+
+    @_mpParty.setter
+    def _mpParty(self, value):
+        self.__mpParty = value
+
+    @property
+    def _mpElectorate(self):
+        return self.__mpElectorate
+
+    @_mpElectorate.setter
+    def _mpElectorate(self, value):
+        self.__mpElectorate = value
+
+    @property
+    def _mpValidvotes(self):
+        return self.__mpValidvotes
+
+    @_mpValidvotes.setter
+    def _mpValidvotes(self, value):
+        self.__mpValidvotes = value
+
+    @property
+    def _mpInvalidvotes(self):
+        return self.__mpInvalidvotes
+
+    @_mpInvalidvotes.setter
+    def _mpInvalidvotes(self, value):
+        self.__mpInvalidvotes = value
+
+
     
 
 class Party:
@@ -32,12 +123,12 @@ class Party:
     __pTotalMPs = 0
     __pParties = []
     
-    
-    def Get_totalMPs():
+    @property
+    def _totalMPs():
         return Party.__pTotalMPs
     
-    
-    def Set_totalMPs(totalmps):
+    @_totalMPs.setter
+    def _totalMPs(totalmps):
         Party.__pTotalMPs = totalmps 
     
 
@@ -65,10 +156,10 @@ def manage_data():
         
         totalmps += 1
     
-    Party.Set_totalMPs(totalmps)
+    Party._totalMPs = totalmps
     
-    print(Party.Get_totalMPs())
-        
+   
+    print(Party._totalMPs)
     
     
 
