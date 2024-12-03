@@ -4,12 +4,34 @@
 # imports
 import csv
 
+# Lists to store my Constituency, MP and Party objects
+Constituencies = []
+MPs = []
+Parties = []
+
+
 # Classes
 
 class Party:
     '''Party class'''
-     
-
+    def __init__(self,name):
+        self.__Description = {'Name':name, 'Members':0,'Votes':0}
+        
+    def IncrementMemberCount(self):
+        self.__Description['Members'] += 1
+    def IncrementVotesCount(self,votes):
+        self.__Description['Votes'] += int(votes)
+        
+    @property   # Property Decorator allows me to Get, Set and delete atrribute values easily
+    def Get_pName(self):
+        return self.__Description['Name']
+    
+    @property
+    def Get_pVotes(self):
+        return self.__Description['Votes']
+        
+    def __str__(self):
+        return f"{self.__Description['Name']}, 'has', {self.__Description['Members']}, 'Members and', {self.__Description['Votes']}, 'Total Votes'"
 
 class Constituency:
     '''Constituency class'''
@@ -22,7 +44,7 @@ class Constituency:
 
     # Getters and Setters
     
-    @property # Property Decorator allows me to Get, Set and delete atrribute values easily
+    @property 
     def Get_cName(self):
         return self.__cName
 
@@ -133,12 +155,9 @@ def read_file():
     csvfile.close()
 
 
+
 def manage_data():
     csvfile = read_file()
-    Constituencies = []
-    MPs = []
-    Parties = []
-    
     for row in csvfile:
         constituency = Constituency(name = row['Constituency name'],region=row['Region name'],country=row['Country name'],type=row['Constituency type'])
         mp = MP(firstname=row['Member first name'],surname=row['Member surname'],gender=row['Member gender'],party=row['First party'],electorate=int(row['Electorate'].replace(",", "")),validvotes=int(row['Valid votes'].replace(",", "")),invalidvotes=int(row['Invalid votes'].replace(",", "")))
