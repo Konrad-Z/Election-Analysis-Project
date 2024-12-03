@@ -8,7 +8,7 @@ import csv
 Constituencies = []
 MPs = []
 Parties = []
-
+PartyNames = []
 
 # Classes
 
@@ -17,7 +17,7 @@ class Party:
     def __init__(self,name):
         self.__Description = {'Name':name, 'Members':0,'Votes':0}
         
-    def Set_TotalMembers(self):
+    def IncrementMembers(self):
         self.__Description['Members'] += 1
     def SetTotalVotes(self,votes):
         self.__Description['Votes'] += int(votes)
@@ -101,12 +101,15 @@ def read_file():
 def manage_data():
     csvfile = read_file()
     for row in csvfile:
-        
+        # Setting MP information
         mp = MP(firstname=row['Member first name'],surname=row['Member surname'],gender=row['Member gender'],constituency=row['Constituency name'],party=row['First party'])
-        
-        
+        mp.SetVotingData(row['Valid votes'], row['Invalid votes'],row['Electorate'])
         MPs.append(mp)
         
+        #Getting unique parties
+        if row['First party'] not in PartyNames:
+            PartyNames.append(row['First party'])
+    print(PartyNames)
 manage_data()
 
 
