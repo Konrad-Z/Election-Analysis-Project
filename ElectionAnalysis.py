@@ -22,7 +22,7 @@ class Party:
     def SetTotalVotes(self,votes):
         self.__Description['Votes'] += int(votes)
         
-    @property   # Property Decorator allows me to Get, Set and delete atrribute values easily
+    # Property Decorator allows me to Get, Set and delete atrribute values easily
     def Get_pName(self):
         return self.__Description['Name']
     
@@ -31,7 +31,7 @@ class Party:
         return self.__Description['Votes']
         
     def __str__(self):
-        return f"{self.__Description['Name']}, 'has', {self.__Description['Members']}, 'Members and', {self.__Description['Votes']}, 'Total Votes'"
+        return f"{self.__Description['Name']} has {self.__Description['Members']} Members and {self.__Description['Votes']} Total Votes'"
 
 
 class MP:
@@ -101,15 +101,37 @@ def read_file():
 def manage_data():
     csvfile = read_file()
     for row in csvfile:
-        # Setting MP information
-        mp = MP(firstname=row['Member first name'],surname=row['Member surname'],gender=row['Member gender'],constituency=row['Constituency name'],party=row['First party'])
-        mp.SetVotingData(row['Valid votes'], row['Invalid votes'],row['Electorate'])
-        MPs.append(mp)
         
-        #Getting unique parties
-        if row['First party'] not in PartyNames:
-            PartyNames.append(row['First party'])
-    print(PartyNames)
+        party = row['First party']
+        
+        # Setting MP information
+        mpObject = MP(firstname=row['Member first name'],surname=row['Member surname'],gender=row['Member gender'],constituency=row['Constituency name'],party=row['First party'])
+        mpObject.SetVotingData(row['Valid votes'], row['Invalid votes'],row['Electorate'])
+        MPs.append(mpObject)
+        
+        if party not in PartyNames:
+            thisParty = Party(party)
+            thisParty.IncrementMembers()
+            PartyNames.append(party)
+            Parties.append(thisParty)
+        else:
+            for p in Parties:
+                if p.Get_pName() == party:
+                    p.IncrementMembers()
+
+    for p in Parties:
+        print(p)
+    
+                
+    
+    
+            
+                     
+    
+                    
+
+   
+    
 manage_data()
 
 
