@@ -50,6 +50,12 @@ class MP:
     def __str__(self):
         return self.__description
 
+    # Setting Votes and electorate data
+    def SetVotingData(self, validvotes,invalidvotes, electorate):
+        self.__description['Valid Votes'] = int(validvotes)
+        self.__description['Invalid Votes'] = int(invalidvotes)
+        self.__description['Electorate'] = int(electorate)   
+        
     @property
     def Get_mpFirstname(self):
         return self.__mpFirstname
@@ -59,6 +65,10 @@ class MP:
         return self.__mpSurname
 
     @property
+    def Get_mpConstituency(self):
+        return self.__mpConstituency
+    
+    @property
     def Get_mpGender(self):
         return self.__mpGender
 
@@ -66,13 +76,19 @@ class MP:
     def Get_mpParty(self):
         return self.__mpParty
 
-    # Setting Votes and electorate data
+    @property
+    def Get_ValidVotes(self):
+        return self.__description['Valid Votes']
     
-    def SetVotingData(self, validvotes,invalidvotes, electorate):
-        self.__description['Valid Votes'] = int(validvotes)
-        self.__description['Invalid Votes'] = int(invalidvotes)
-        self.__description['Electorate'] = int(electorate)
+    @property
+    def Get_InvalidVotes(self):
+        return self.__description['Invalid Votes']
     
+    @property
+    def Get_Electorate(self):
+        return self.__description['Electorate']
+    
+
 def read_file():
     '''Reading CSV'''
     csvfile = open('FullDataFor2024.csv', 'r+')
