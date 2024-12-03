@@ -17,9 +17,9 @@ class Party:
     def __init__(self,name):
         self.__Description = {'Name':name, 'Members':0,'Votes':0}
         
-    def IncrementMemberCount(self):
+    def Set_TotalMembers(self):
         self.__Description['Members'] += 1
-    def IncrementVotesCount(self,votes):
+    def SetTotalVotes(self,votes):
         self.__Description['Votes'] += int(votes)
         
     @property   # Property Decorator allows me to Get, Set and delete atrribute values easily
@@ -41,42 +41,24 @@ class Constituency:
         self.__cCountry = country
         self.__cType = type
 
-
     # Getters and Setters
-    
     @property 
     def Get_cName(self):
         return self.__cName
-
-    @Get_cName.setter
-    def Set_cName(self, value):
-        self.__cName = value
 
     @property
     def Get_cRegion(self):
         return self.__cRegion
 
-    @Get_cRegion.setter
-    def Set_cRegion(self, value):
-        self.__cRegion = value
-
     @property
     def Get_cCountry(self):
         return self.__cCountry
-
-    @Get_cCountry.setter
-    def Set_cCountry(self, value):
-        self.__cCountry = value
 
     @property
     def Get_cType(self):
         return self.__cType
 
-    @Get_cType.setter
-    def Set_cType(self, value):
-        self.__cType = value
-
-            
+        
 class MP:
     '''Member of Parliament class'''
     def __init__(self,firstname,surname,gender,party,electorate,validvotes,invalidvotes):   
@@ -94,57 +76,29 @@ class MP:
     def Get_mpFirstname(self):
         return self.__mpFirstname
 
-    @Get_mpFirstname.setter
-    def Set_mpFirstname(self, value):
-        self.__mpFirstname = value
-
     @property
     def Get_mpSurname(self):
         return self.__mpSurname
-
-    @Get_mpSurname.setter
-    def Set_mpSurname(self, value):
-        self.__mpSurname = value
 
     @property
     def Get_mpGender(self):
         return self.__mpGender
 
-    @Get_mpGender.setter
-    def Set_mpGender(self, value):
-        self.__mpGender = value
-
     @property
     def Get_mpParty(self):
         return self.__mpParty
-
-    @Get_mpParty.setter
-    def Set_mpParty(self, value):
-        self.__mpParty = value
 
     @property
     def Get_mpElectorate(self):
         return self.__mpElectorate
 
-    @Get_mpElectorate.setter
-    def Set_mpElectorate(self, value):
-        self.__mpElectorate = value
-
     @property
     def Get_mpValidvotes(self):
         return self.__mpValidvotes
-
-    @Get_mpValidvotes.setter
-    def Set_mpValidvotes(self, value):
-        self.__mpValidvotes = value
-
+    
     @property
     def Get_mpInvalidvotes(self):
         return self.__mpInvalidvotes
-
-    @Get_mpInvalidvotes.setter
-    def Set_mpInvalidvotes(self, value):
-        self.__mpInvalidvotes = value
 
 
 def read_file():
