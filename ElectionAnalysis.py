@@ -6,6 +6,11 @@ import csv
 
 # Classes
 
+class Party:
+    '''Party class'''
+     
+
+
 class Constituency:
     '''Constituency class'''
     def __init__(self,name,region,country,type):
@@ -14,7 +19,10 @@ class Constituency:
         self.__cCountry = country
         self.__cType = type
 
-    @property
+
+    # Getters and Setters
+    
+    @property # Property Decorator allows me to Get, Set and delete atrribute values easily
     def Get_cName(self):
         return self.__cName
 
@@ -58,6 +66,8 @@ class MP:
         self.__mpValidvotes = validvotes
         self.__mpInvalidvotes = invalidvotes
 
+    # Getters and Setters
+    
     @property
     def Get_mpFirstname(self):
         return self.__mpFirstname
@@ -115,23 +125,6 @@ class MP:
         self.__mpInvalidvotes = value
 
 
-class Party:
-    '''Party class'''
-    __pTotalMPs = 0
-    __pParties = []
-    
-    @property
-    def _totalMPs():
-        return Party.__pTotalMPs
-    
-    @_totalMPs.setter
-    def _totalMPs(totalmps):
-        Party.__pTotalMPs = totalmps 
-    
-
-    
-
-
 def read_file():
     '''Reading CSV'''
     csvfile = open('FullDataFor2024.csv', 'r+')
@@ -144,25 +137,15 @@ def manage_data():
     csvfile = read_file()
     Constituencies = []
     MPs = []
-    totalmps = 0
+    Parties = []
+    
     for row in csvfile:
         constituency = Constituency(name = row['Constituency name'],region=row['Region name'],country=row['Country name'],type=row['Constituency type'])
         mp = MP(firstname=row['Member first name'],surname=row['Member surname'],gender=row['Member gender'],party=row['First party'],electorate=int(row['Electorate'].replace(",", "")),validvotes=int(row['Valid votes'].replace(",", "")),invalidvotes=int(row['Invalid votes'].replace(",", "")))
+        
         Constituencies.append(constituency)
         MPs.append(mp)
         
-        totalmps += 1
-    
-    Party._totalMPs = totalmps
-
-    print(Party._totalMPs)
-    
-    
-
-    for c in Constituencies:
-        if c.Get_cName == "Ashfield":
-            print("Yes")
-
 manage_data()
 
 
