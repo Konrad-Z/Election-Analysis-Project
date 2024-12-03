@@ -36,17 +36,20 @@ class Party:
 
 class MP:
     '''Member of Parliament class'''
-    def __init__(self,firstname,surname,gender,party,electorate,validvotes,invalidvotes):   
+    def __init__(self,firstname,surname,constituency,gender,party):   
         self.__mpFirstname = firstname
         self.__mpSurname = surname
+        self.__mpConstituency = constituency
         self.__mpGender = gender
         self.__mpParty = party
-        self.__mpElectorate = electorate
-        self.__mpValidvotes = validvotes
-        self.__mpInvalidvotes = invalidvotes
-
+        
+        self.__description = {'Name': self.__mpFirstname + '' + self.__mpSurname, 'Constituency': self.__mpConstituency, 'Gender': self.__mpGender, 'Party': self.__mpParty, 'Electorate': 0, 'Valid Votes': 0,'Invalid Votes': 0}
+        
     # Getters and Setters
     
+    def __str__(self):
+        return self.__description
+
     @property
     def Get_mpFirstname(self):
         return self.__mpFirstname
@@ -88,10 +91,10 @@ def read_file():
 def manage_data():
     csvfile = read_file()
     for row in csvfile:
-        constituency = Constituency(name = row['Constituency name'],region=row['Region name'],country=row['Country name'],type=row['Constituency type'])
-        mp = MP(firstname=row['Member first name'],surname=row['Member surname'],gender=row['Member gender'],party=row['First party'],electorate=int(row['Electorate'].replace(",", "")),validvotes=int(row['Valid votes'].replace(",", "")),invalidvotes=int(row['Invalid votes'].replace(",", "")))
         
-        Constituencies.append(constituency)
+        mp = MP(firstname=row['Member first name'],surname=row['Member surname'],gender=row['Member gender'],constituency=row['Constituency name'],party=row['First party'])
+        
+        
         MPs.append(mp)
         
 manage_data()
