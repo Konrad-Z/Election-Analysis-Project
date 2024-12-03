@@ -33,32 +33,7 @@ class Party:
     def __str__(self):
         return f"{self.__Description['Name']}, 'has', {self.__Description['Members']}, 'Members and', {self.__Description['Votes']}, 'Total Votes'"
 
-class Constituency:
-    '''Constituency class'''
-    def __init__(self,name,region,country,type):
-        self.__cName = name
-        self.__cRegion = region
-        self.__cCountry = country
-        self.__cType = type
 
-    # Getters and Setters
-    @property 
-    def Get_cName(self):
-        return self.__cName
-
-    @property
-    def Get_cRegion(self):
-        return self.__cRegion
-
-    @property
-    def Get_cCountry(self):
-        return self.__cCountry
-
-    @property
-    def Get_cType(self):
-        return self.__cType
-
-        
 class MP:
     '''Member of Parliament class'''
     def __init__(self,firstname,surname,gender,party,electorate,validvotes,invalidvotes):   
