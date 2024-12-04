@@ -96,7 +96,6 @@ def read_file():
     csvfile.close()
 
 
-
 def manage_data():
     csvfile = read_file()
     for row in csvfile:
@@ -123,19 +122,6 @@ def manage_data():
                 if p.Get_pName() == party:
                     p.IncrementMembers()
                     p.SetTotalVotes(mpObject.Get_Votes)
-        
-    for p in Parties:
-        print(p)
-    
-                
-    
-    
-            
-                     
-    
-                    
-
-   
     
 manage_data()
 
@@ -145,7 +131,7 @@ MainOptions = ['List the MPs', 'List the constituencies', 'List the Parties']
 
 # Main Menu
 
-print('\nWelcome to the 2024 General Election Analysis App')
+print('Welcome to the 2024 General Election Analysis App')
 print('Choose your option - Use the number')
 print('#\t Option')
 
