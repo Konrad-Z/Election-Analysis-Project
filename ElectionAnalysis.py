@@ -15,23 +15,23 @@ PartyNames = [] # Temp List to get unique parties
 class Party:
     '''Party class'''
     def __init__(self,name):
-        self.__Description = {'Name':name, 'Members':0,'Votes':0}
+        self.__pDescription = {'Name':name, 'Members':0,'Votes':0}
         
     def IncrementMembers(self):
-        self.__Description['Members'] += 1
+        self.__pDescription['Members'] += 1
     def SetTotalVotes(self,votes):
-        self.__Description['Votes'] += int(votes)
+        self.__pDescription['Votes'] += int(votes)
         
     # Property Decorator allows me to Get, Set and delete atrribute values easily
     def Get_pName(self):
-        return self.__Description['Name']
+        return self.__pDescription['Name']
     
     @property
     def Get_pVotes(self):
-        return self.__Description['Votes']
+        return self.__pDescription['Votes']
         
     def __str__(self):
-        return f"{self.__Description['Name']} has {self.__Description['Members']} Members and {self.__Description['Votes']} Total Votes'"
+        return f"{self.__pDescription['Name']} has {self.__pDescription['Members']} Members and {self.__pDescription['Votes']} Total Votes'"
 
 
 class MP:
@@ -43,17 +43,17 @@ class MP:
         self.__mpGender = gender
         self.__mpParty = party
         
-        self.__description = {'Name': self.__mpFirstname + ' ' + self.__mpSurname, 'Constituency': self.__mpConstituency, 'Gender': self.__mpGender, 'Party': self.__mpParty, 'Votes': 0,'Electorate': 0,}
+        self.__mpDescription = {'Name': self.__mpFirstname + ' ' + self.__mpSurname, 'Constituency': self.__mpConstituency, 'Gender': self.__mpGender, 'Party': self.__mpParty, 'Votes': 0,'Electorate': 0,}
         
     # Getters and Setters
     
     def __str__(self):
-        return f'Name: {self.__description['Name']:<30} Gender: {self.__description['Gender']:<30} Constituency: {self.__description['Constituency']:<30} Party: {self.__description['Party']:<30} Votes: {self.__description['Votes']:<30}'
+        return f'Name: {self.__mpDescription['Name']:<30} Gender: {self.__mpDescription['Gender']:<30} Constituency: {self.__mpDescription['Constituency']:<30} Party: {self.__mpDescription['Party']:<30} Votes: {self.__mpDescription['Votes']:<30}'
 
     # Setting Votes and electorate data
     def SetVotingData(self,electorate, votes):
-        self.__description['Electorate'] = int(electorate)
-        self.__description['Votes'] = int(votes)
+        self.__mpDescription['Electorate'] = int(electorate)
+        self.__mpDescription['Votes'] = int(votes)
         
     @property
     def Get_mpFirstname(self):
@@ -77,18 +77,16 @@ class MP:
 
     @property
     def Get_Votes(self):
-        return self.__description['Votes']
+        return self.__mpDescription['Votes']
     
     @property
     def Get_InvalidVotes(self):
-        return self.__description['Invalid Votes']
+        return self.__mpDescription['Invalid Votes']
     
     @property
     def Get_Electorate(self):
-        return self.__description['Electorate']
+        return self.__mpDescription['Electorate']
     
-
-
 
 def read_file():
     '''Reading CSV'''
