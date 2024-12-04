@@ -21,18 +21,15 @@ class Party:
         self.__pDescription['Members'] += 1
     def SetTotalVotes(self,votes):
         self.__pDescription['Votes'] += int(votes)
-        
-    
+
     def Get_pName(self):
         return self.__pDescription['Name']
     
-    @property # Property Decorator allows me to Get, Set and delete atrribute values easily
     def Get_pVotes(self):
         return self.__pDescription['Votes']
         
     def __str__(self):
         return f'Name: {self.__pDescription['Name']:<30} Members: {self.__pDescription['Members']:<30} Votes: {self.__pDescription['Votes']:<30}'
-
 
 class MP:
     '''Member of Parliament class'''
@@ -45,41 +42,38 @@ class MP:
         
         self.__mpDescription = {'Name': self.__mpFirstname + ' ' + self.__mpSurname, 'Constituency': self.__mpConstituency, 'Gender': self.__mpGender, 'Party': self.__mpParty, 'Votes': 0,'Electorate': 0,}
         
-    # Getters and Setters
-    
     def __str__(self):
         return f'Name: {self.__mpDescription['Name']:<30} Gender: {self.__mpDescription['Gender']:<30} Constituency: {self.__mpDescription['Constituency']:<30} Party: {self.__mpDescription['Party']:<30} Votes: {self.__mpDescription['Votes']:<30}'
 
-    # Setting Votes and electorate data
     def SetVotingData(self,electorate, votes):
         self.__mpDescription['Electorate'] = int(electorate)
         self.__mpDescription['Votes'] = int(votes)
         
-    @property
-    def Get_mpFirstname(self):
+    
+    def Get_mpFirstname(self):#
         return self.__mpFirstname
 
-    @property
-    def Get_mpSurname(self):
+    
+    def Get_mpSurname(self):#
         return self.__mpSurname
 
-    @property
+    
     def Get_mpConstituency(self):
         return self.__mpConstituency
     
-    @property
+    
     def Get_mpGender(self):
         return self.__mpGender
 
-    @property
+    
     def Get_mpParty(self):
         return self.__mpParty
 
-    @property
+    
     def Get_Votes(self):
         return self.__mpDescription['Votes']
     
-    @property
+    
     def Get_Electorate(self):
         return self.__mpDescription['Electorate']
     
@@ -92,7 +86,7 @@ class Constituency:
         self.__cType = type
         self.__cDescription = {'Name': self.__cName, 'Region': self.__cRegion,'Country':self.__cCountry,'Type': self.__cType}
         
-    @property
+    
     def Get_cName(self):
         return self.__cName
     
@@ -136,14 +130,14 @@ def manage_data():
         if party not in PartyNames:
             thisParty = Party(party)
             thisParty.IncrementMembers()
-            thisParty.SetTotalVotes(mpObject.Get_Votes)
+            thisParty.SetTotalVotes(mpObject.Get_Votes())
             PartyNames.append(party)
             Parties.append(thisParty)
         else:
             for p in Parties:
                 if p.Get_pName() == party:
                     p.IncrementMembers()
-                    p.SetTotalVotes(mpObject.Get_Votes)
+                    p.SetTotalVotes(mpObject.Get_Votes())
     
 manage_data()
 
