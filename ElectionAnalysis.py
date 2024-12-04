@@ -88,6 +88,8 @@ class MP:
         return self.__description['Electorate']
     
 
+
+
 def read_file():
     '''Reading CSV'''
     csvfile = open('FullDataFor2024.csv', 'r+')
@@ -143,6 +145,5 @@ for option in MainOptions:
 UserInput = int(input('\nEnter your choice: '))
 
 if UserInput == 0:
-    print('MP Name:')
     for mp in MPs:
         print(mp)
