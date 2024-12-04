@@ -43,7 +43,7 @@ class MP:
         self.__mpGender = gender
         self.__mpParty = party
         
-        self.__description = {'Name': self.__mpFirstname + '' + self.__mpSurname, 'Constituency': self.__mpConstituency, 'Gender': self.__mpGender, 'Party': self.__mpParty, 'Valid Votes': 0,'Invalid Votes': 0,  'Electorate': 0,}
+        self.__description = {'Name': self.__mpFirstname + '' + self.__mpSurname, 'Constituency': self.__mpConstituency, 'Gender': self.__mpGender, 'Party': self.__mpParty, 'Votes': 0,'Electorate': 0,}
         
     # Getters and Setters
     
@@ -51,10 +51,9 @@ class MP:
         return self.__description
 
     # Setting Votes and electorate data
-    def SetVotingData(self, validvotes,invalidvotes, electorate):
-        self.__description['Valid Votes'] = int(validvotes)
-        self.__description['Invalid Votes'] = int(invalidvotes)
-        self.__description['Electorate'] = int(electorate)   
+    def SetVotingData(self,electorate, votes):
+        self.__description['Electorate'] = int(electorate)
+        self.__description['Votes'] = int(votes)
         
     @property
     def Get_mpFirstname(self):
@@ -77,8 +76,8 @@ class MP:
         return self.__mpParty
 
     @property
-    def Get_ValidVotes(self):
-        return self.__description['Valid Votes']
+    def Get_Votes(self):
+        return self.__description['Votes']
     
     @property
     def Get_InvalidVotes(self):
@@ -106,19 +105,25 @@ def manage_data():
         
         # Setting MP information
         mpObject = MP(firstname=row['Member first name'],surname=row['Member surname'],gender=row['Member gender'],constituency=row['Constituency name'],party=row['First party'])
-        mpObject.SetVotingData(row['Valid votes'], row['Invalid votes'],row['Electorate'])
+        
+        if party == 'Ind' or party == 'TUV' or party == 'Spk':
+            mpObject.SetVotingData(row['Electorate'],row['Of which other winner'])
+        else:
+            mpObject.SetVotingData(row['Electorate'],row[party])
         MPs.append(mpObject)
         
         if party not in PartyNames:
             thisParty = Party(party)
             thisParty.IncrementMembers()
+            thisParty.SetTotalVotes(mpObject.Get_Votes)
             PartyNames.append(party)
             Parties.append(thisParty)
         else:
             for p in Parties:
                 if p.Get_pName() == party:
                     p.IncrementMembers()
-
+                    p.SetTotalVotes(mpObject.Get_Votes)
+        
     for p in Parties:
         print(p)
     
