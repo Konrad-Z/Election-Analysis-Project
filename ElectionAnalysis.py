@@ -8,7 +8,7 @@ import csv
 Constituencies = []
 MPs = []
 Parties = []
-PartyNames = []
+PartyNames = [] # Temp List to get unique parties
 
 # Classes
 
