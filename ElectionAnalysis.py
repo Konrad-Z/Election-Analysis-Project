@@ -22,11 +22,11 @@ class Party:
     def SetTotalVotes(self,votes):
         self.__pDescription['Votes'] += int(votes)
         
-    # Property Decorator allows me to Get, Set and delete atrribute values easily
+    
     def Get_pName(self):
         return self.__pDescription['Name']
     
-    @property
+    @property # Property Decorator allows me to Get, Set and delete atrribute values easily
     def Get_pVotes(self):
         return self.__pDescription['Votes']
         
@@ -80,15 +80,36 @@ class MP:
         return self.__mpDescription['Votes']
     
     @property
-    def Get_InvalidVotes(self):
-        return self.__mpDescription['Invalid Votes']
-    
-    @property
     def Get_Electorate(self):
         return self.__mpDescription['Electorate']
     
-
-def read_file():
+class Constituency:
+    '''Constituency class'''
+    def __init__(self,name,region,country,type):
+        self.__cName = name
+        self.__cRegion = region
+        self.__cCountry = country
+        self.__cType = type
+        self.__cDescription = {'Name': self.__cName, 'Region': self.__cRegion,'Country':self.__cCountry,'Type': self.__cType}
+        
+    @property
+    def Get_cName(self):
+        return self.__cName
+    
+    def Get_cRegion(self):
+        return self.__cRegion
+    
+    def Get_cCountry(self):
+        return self.__cCountry
+    
+    def Get_cType(self):
+        return self.__cType
+    
+    def __str__(self):
+        return f'Constituency name: {self.__cDescription['Name']:<50} Region: {self.__cDescription['Region']:<50} Country: {self.__cDescription['Country']:50} Type: {self.__cDescription['Type']:<50}'
+        
+        
+def read_file(): 
     '''Reading CSV'''
     csvfile = open('FullDataFor2024.csv', 'r+')
     reader = csv.DictReader(csvfile)
@@ -104,13 +125,14 @@ def manage_data():
         
         # Setting MP information
         mpObject = MP(firstname=row['Member first name'],surname=row['Member surname'],gender=row['Member gender'],constituency=row['Constituency name'],party=row['First party'])
-        
+        constituency = Constituency(name = row['Constituency name'],region=row['Region name'],country=row['Country name'],type=row['Constituency type'])
         if party == 'Ind' or party == 'TUV' or party == 'Spk':
             mpObject.SetVotingData(row['Electorate'],row['Of which other winner'])
         else:
             mpObject.SetVotingData(row['Electorate'],row[party])
         MPs.append(mpObject)
-        
+        Constituencies.append(constituency)
+
         if party not in PartyNames:
             thisParty = Party(party)
             thisParty.IncrementMembers()
@@ -145,3 +167,6 @@ UserInput = int(input('\nEnter your choice: '))
 if UserInput == 0:
     for mp in MPs:
         print(mp)
+elif UserInput == 1:
+    for constituency in Constituencies:
+        print(constituency)
