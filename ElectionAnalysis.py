@@ -50,11 +50,11 @@ class MP:
         self.__mpDescription['Votes'] = int(votes)
         
     
-    def Get_mpFirstname(self):#
+    def Get_mpFirstname(self):
         return self.__mpFirstname
 
     
-    def Get_mpSurname(self):#
+    def Get_mpSurname(self):
         return self.__mpSurname
 
     
