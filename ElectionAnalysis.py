@@ -127,11 +127,11 @@ manage_data()
 
 
 
-MainOptions = ['List the MPs', 'List the constituencies', 'List the Parties']
+MainOptions = ['List MP information', 'List the constituencies', 'List the Parties']
 
 # Main Menu
 
-print('Welcome to the 2024 General Election Analysis App')
+print('\nWelcome to the 2024 General Election Analysis App')
 print('Choose your option - Use the number')
 print('#\t Option')
 
@@ -140,3 +140,8 @@ for option in MainOptions:
     print(optionNumber, '\t', option)
     optionNumber += 1
 
+UserInput = int(input('\nEnter your choice: '))
+
+if UserInput == 0:
+    for mp in MPs:
+        print(mp)
