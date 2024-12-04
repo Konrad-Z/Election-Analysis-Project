@@ -20,7 +20,7 @@ class Party:
     def __str__(self):
         return f'Name: {self.__pDescription['Name']:<30} Members: {self.__pDescription['Members']:<30} Votes: {self.__pDescription['Votes']:<30}'
     
-    # Methods to increment party members and party votes
+    # Methods to increment party members and party votes (Setters)
     def IncrementMembers(self):
         self.__pDescription['Members'] += 1
     def IncrementTotalVotes(self,votes):
@@ -29,7 +29,6 @@ class Party:
     # Getters
     def Get_pName(self):
         return self.__pDescription['Name']
-    
     def Get_pVotes(self):
         return self.__pDescription['Votes']
         
@@ -43,42 +42,29 @@ class MP:
         self.__mpConstituency = constituency
         self.__mpGender = gender
         self.__mpParty = party
-        
         self.__mpDescription = {'Name': self.__mpFirstname + ' ' + self.__mpSurname, 'Constituency': self.__mpConstituency, 'Gender': self.__mpGender, 'Party': self.__mpParty, 'Votes': 0,'Electorate': 0,}
-        
-    def __str__(self):
-        return f'Name: {self.__mpDescription['Name']:<30} Gender: {self.__mpDescription['Gender']:<30} Constituency: {self.__mpDescription['Constituency']:<30} Party: {self.__mpDescription['Party']:<30} Votes: {self.__mpDescription['Votes']:<30} Electorate: {self.__mpDescription['Votes']:<30}'
 
-    # Methods to set the voting data
+    def __str__(self):
+        return f'Name: {self.__mpDescription['Name']:<30} Gender: {self.__mpDescription['Gender']:<20} Constituency: {self.__mpDescription['Constituency']:<40} Party: {self.__mpDescription['Party']:<10} Votes: {self.__mpDescription['Votes']:<10} Electorate: {self.__mpDescription['Electorate']:<10}'
+
+    # Methods to set the voting data (Setters)
     def SetVotingData(self,electorate, votes):
         self.__mpDescription['Electorate'] = int(electorate)
         self.__mpDescription['Votes'] = int(votes)
         
-    
+    # Getters 
     def Get_mpFirstname(self):
         return self.__mpFirstname
-
-    
     def Get_mpSurname(self):
         return self.__mpSurname
-
-    
     def Get_mpConstituency(self):
         return self.__mpConstituency
-    
-    
     def Get_mpGender(self):
         return self.__mpGender
-
-    
     def Get_mpParty(self):
         return self.__mpParty
-
-    
     def Get_mpVotes(self):
         return self.__mpDescription['Votes']
-    
-    
     def Get_mpElectorate(self):
         return self.__mpDescription['Electorate']
     
@@ -94,21 +80,17 @@ class Constituency:
     def __str__(self):
         return f'Constituency name: {self.__cDescription['Name']:<50} Region: {self.__cDescription['Region']:<50} Country: {self.__cDescription['Country']:50} Type: {self.__cDescription['Type']:<50}'
     
+    # Getters
     def Get_cName(self):
         return self.__cName
-    
     def Get_cRegion(self):
         return self.__cRegion
-    
     def Get_cCountry(self):
         return self.__cCountry
-    
     def Get_cType(self):
         return self.__cType
-    
-    
-        
-        
+
+# Function for Reading the csv file
 def read_file(): 
     '''Reading CSV'''
     csvfile = open('FullDataFor2024.csv', 'r+')
@@ -116,7 +98,7 @@ def read_file():
     return reader
     csvfile.close()
 
-
+# Function for importing all the data from the csv into my classes as objects
 def manage_data():
     csvfile = read_file()
     for row in csvfile:
