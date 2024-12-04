@@ -31,7 +31,7 @@ class Party:
         return self.__pDescription['Votes']
         
     def __str__(self):
-        return f"{self.__pDescription['Name']} has {self.__pDescription['Members']} Members and {self.__pDescription['Votes']} Total Votes'"
+        return f'Name: {self.__pDescription['Name']:<30} Members: {self.__pDescription['Members']:<30} Votes: {self.__pDescription['Votes']:<30}'
 
 
 class MP:
@@ -170,3 +170,6 @@ if UserInput == 0:
 elif UserInput == 1:
     for constituency in Constituencies:
         print(constituency)
+elif UserInput == 2:
+    for party in Parties:
+        print(party)
