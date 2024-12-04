@@ -43,12 +43,12 @@ class MP:
         self.__mpGender = gender
         self.__mpParty = party
         
-        self.__description = {'Name': self.__mpFirstname + '' + self.__mpSurname, 'Constituency': self.__mpConstituency, 'Gender': self.__mpGender, 'Party': self.__mpParty, 'Votes': 0,'Electorate': 0,}
+        self.__description = {'Name': self.__mpFirstname + ' ' + self.__mpSurname, 'Constituency': self.__mpConstituency, 'Gender': self.__mpGender, 'Party': self.__mpParty, 'Votes': 0,'Electorate': 0,}
         
     # Getters and Setters
     
     def __str__(self):
-        return self.__description
+        return f'Name: {self.__description['Name']:<30} Gender: {self.__description['Gender']:<30} Constituency: {self.__description['Constituency']:<30} Party: {self.__description['Party']:<30} Votes: {self.__description['Votes']:<30}'
 
     # Setting Votes and electorate data
     def SetVotingData(self,electorate, votes):
@@ -143,5 +143,6 @@ for option in MainOptions:
 UserInput = int(input('\nEnter your choice: '))
 
 if UserInput == 0:
+    print('MP Name:')
     for mp in MPs:
         print(mp)
