@@ -16,20 +16,24 @@ class Party:
     '''Party class'''
     def __init__(self,name):
         self.__pDescription = {'Name':name, 'Members':0,'Votes':0}
-        
+    
+    def __str__(self):
+        return f'Name: {self.__pDescription['Name']:<30} Members: {self.__pDescription['Members']:<30} Votes: {self.__pDescription['Votes']:<30}'
+    
+    # Methods to increment party members and party votes
     def IncrementMembers(self):
         self.__pDescription['Members'] += 1
-    def SetTotalVotes(self,votes):
+    def IncrementTotalVotes(self,votes):
         self.__pDescription['Votes'] += int(votes)
 
+    # Getters
     def Get_pName(self):
         return self.__pDescription['Name']
     
     def Get_pVotes(self):
         return self.__pDescription['Votes']
         
-    def __str__(self):
-        return f'Name: {self.__pDescription['Name']:<30} Members: {self.__pDescription['Members']:<30} Votes: {self.__pDescription['Votes']:<30}'
+    
 
 class MP:
     '''Member of Parliament class'''
@@ -43,8 +47,9 @@ class MP:
         self.__mpDescription = {'Name': self.__mpFirstname + ' ' + self.__mpSurname, 'Constituency': self.__mpConstituency, 'Gender': self.__mpGender, 'Party': self.__mpParty, 'Votes': 0,'Electorate': 0,}
         
     def __str__(self):
-        return f'Name: {self.__mpDescription['Name']:<30} Gender: {self.__mpDescription['Gender']:<30} Constituency: {self.__mpDescription['Constituency']:<30} Party: {self.__mpDescription['Party']:<30} Votes: {self.__mpDescription['Votes']:<30}'
+        return f'Name: {self.__mpDescription['Name']:<30} Gender: {self.__mpDescription['Gender']:<30} Constituency: {self.__mpDescription['Constituency']:<30} Party: {self.__mpDescription['Party']:<30} Votes: {self.__mpDescription['Votes']:<30} Electorate: {self.__mpDescription['Votes']:<30}'
 
+    # Methods to set the voting data
     def SetVotingData(self,electorate, votes):
         self.__mpDescription['Electorate'] = int(electorate)
         self.__mpDescription['Votes'] = int(votes)
@@ -70,11 +75,11 @@ class MP:
         return self.__mpParty
 
     
-    def Get_Votes(self):
+    def Get_mpVotes(self):
         return self.__mpDescription['Votes']
     
     
-    def Get_Electorate(self):
+    def Get_mpElectorate(self):
         return self.__mpDescription['Electorate']
     
 class Constituency:
@@ -86,6 +91,8 @@ class Constituency:
         self.__cType = type
         self.__cDescription = {'Name': self.__cName, 'Region': self.__cRegion,'Country':self.__cCountry,'Type': self.__cType}
         
+    def __str__(self):
+        return f'Constituency name: {self.__cDescription['Name']:<50} Region: {self.__cDescription['Region']:<50} Country: {self.__cDescription['Country']:50} Type: {self.__cDescription['Type']:<50}'
     
     def Get_cName(self):
         return self.__cName
@@ -99,8 +106,7 @@ class Constituency:
     def Get_cType(self):
         return self.__cType
     
-    def __str__(self):
-        return f'Constituency name: {self.__cDescription['Name']:<50} Region: {self.__cDescription['Region']:<50} Country: {self.__cDescription['Country']:50} Type: {self.__cDescription['Type']:<50}'
+    
         
         
 def read_file(): 
@@ -130,14 +136,14 @@ def manage_data():
         if party not in PartyNames:
             thisParty = Party(party)
             thisParty.IncrementMembers()
-            thisParty.SetTotalVotes(mpObject.Get_Votes())
+            thisParty.IncrementTotalVotes(mpObject.Get_mpVotes())
             PartyNames.append(party)
             Parties.append(thisParty)
         else:
             for p in Parties:
                 if p.Get_pName() == party:
                     p.IncrementMembers()
-                    p.SetTotalVotes(mpObject.Get_Votes())
+                    p.IncrementTotalVotes(mpObject.Get_mpVotes())
     
 manage_data()
 
