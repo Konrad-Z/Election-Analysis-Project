@@ -42,17 +42,18 @@ class MP:
         self.__mpConstituency = constituency
         self.__mpGender = gender
         self.__mpParty = party
-        self.__mpDescription = {'Name': self.__mpFirstname + ' ' + self.__mpSurname, 'Constituency': self.__mpConstituency, 'Gender': self.__mpGender, 'Party': self.__mpParty, 'Votes': 0,'Electorate': 0, 'Majority':0}
+        self.__mpDescription = {'Name': self.__mpFirstname + ' ' + self.__mpSurname, 'Constituency': self.__mpConstituency, 'Gender': self.__mpGender, 'Party': self.__mpParty, 'Votes': 0,'Electorate': 0, 'Majority':0, 'Valid Votes': 0, 'Percentage of Votes':0}
 
     def __str__(self):
-        return f'Name: {self.__mpDescription['Name']:<30} Gender: {self.__mpDescription['Gender']:<20} Constituency: {self.__mpDescription['Constituency']:<40} Party: {self.__mpDescription['Party']:<10} Votes: {self.__mpDescription['Votes']:<10} Electorate: {self.__mpDescription['Electorate']:<10} Majority: {self.__mpDescription['Majority']}'
+        return f'Name: {self.__mpDescription['Name']:<30} Gender: {self.__mpDescription['Gender']:<20} Constituency: {self.__mpDescription['Constituency']:<40} Party: {self.__mpDescription['Party']:<10} Votes: {self.__mpDescription['Votes']:<10} Valid Total Votes cast: {self.__mpDescription['Valid Votes']:<10} Majority: {self.__mpDescription['Majority']:<10} % of Votes: {self.__mpDescription['Percentage of Votes']:.2f}'
 
     # Methods to set the voting data for the mp (Setters)
-    def SetVotingData(self,electorate, votes,majority):
+    def SetVotingData(self,electorate, votes,majority,validvotes):
         self.__mpDescription['Electorate'] = int(electorate)
         self.__mpDescription['Votes'] = int(votes)
         self.__mpDescription['Majority'] = int(majority)
-        
+        self.__mpDescription['Valid Votes'] = int(validvotes)
+        self.__mpDescription['Percentage of Votes'] = (self.__mpDescription['Votes'] / self.__mpDescription['Valid Votes']) * 100
     # Getters 
     def Get_mpFirstname(self):
         return self.__mpFirstname
@@ -112,9 +113,9 @@ def manage_data():
         mpObject = MP(firstname=row['Member first name'],surname=row['Member surname'],gender=row['Member gender'],constituency=row['Constituency name'],party=row['First party'])
         constituency = Constituency(name = row['Constituency name'],region=row['Region name'],country=row['Country name'],type=row['Constituency type'])
         if party == 'Ind' or party == 'TUV' or party == 'Spk':
-            mpObject.SetVotingData(row['Electorate'],row['Of which other winner'],row['Majority'])
+            mpObject.SetVotingData(row['Electorate'],row['Of which other winner'],row['Majority'],row['Valid votes'])
         else:
-            mpObject.SetVotingData(row['Electorate'],row[party],row['Majority'])
+            mpObject.SetVotingData(row['Electorate'],row[party],row['Majority'],row['Valid votes'])
         MPs.append(mpObject)
         Constituencies.append(constituency)
 
