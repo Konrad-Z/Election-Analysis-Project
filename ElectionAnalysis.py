@@ -76,16 +76,17 @@ class MP:
     
 class Constituency:
     '''Constituency class'''
-    def __init__(self,name,region,country,type,electorate):
+    def __init__(self,name,region,country,type,electorate,mp):
         self.__cName = name
         self.__cRegion = region
         self.__cCountry = country
         self.__cType = type
         self.__cElectorate = electorate
-        self.__cDescription = {'Name': self.__cName, 'Region': self.__cRegion,'Country':self.__cCountry,'Type': self.__cType, 'Electorate': self.__cElectorate}
+        self.__cMP = mp
+        self.__cDescription = {'Name': self.__cName, 'Region': self.__cRegion,'Country':self.__cCountry,'Type': self.__cType, 'Electorate': self.__cElectorate, 'Elected MP': self.__cMP}
         
     def __str__(self):
-        return f'Constituency name: {self.__cDescription['Name']:<40} Region: {self.__cDescription['Region']:<40} Country: {self.__cDescription['Country']:25} Type: {self.__cDescription['Type']:<25} Electorate: {self.__cDescription['Electorate']}'
+        return f'Constituency name: {self.__cDescription['Name']:<40} Region: {self.__cDescription['Region']:<30} Country: {self.__cDescription['Country']:25} Type: {self.__cDescription['Type']:<20} Electorate: {self.__cDescription['Electorate']:<20} Elected MP: {self.__cDescription['Elected MP']:<25}'
     
     # Getters
     def Get_cName(self):
@@ -116,7 +117,7 @@ def manage_data():
         
         # Setting MP information
         mpObject = MP(firstname=row['Member first name'],surname=row['Member surname'],gender=row['Member gender'],constituency=row['Constituency name'],party=row['First party'],result=row['Result'])
-        constituency = Constituency(name = row['Constituency name'],region=row['Region name'],country=row['Country name'],type=row['Constituency type'],electorate=row['Electorate'])
+        constituency = Constituency(name = row['Constituency name'],region=row['Region name'],country=row['Country name'],type=row['Constituency type'],electorate=row['Electorate'],mp=row['Member first name'] + ' ' + row['Member surname'])
         if party == 'Ind' or party == 'TUV' or party == 'Spk':
             mpObject.SetVotingData(row['Electorate'],row['Of which other winner'],row['Majority'],row['Valid votes'])
         else:
