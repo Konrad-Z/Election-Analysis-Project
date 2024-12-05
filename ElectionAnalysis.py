@@ -96,7 +96,8 @@ class Constituency:
         return self.__cCountry
     def Get_cType(self):
         return self.__cType
-    
+    def Get_cDescription(self):
+        return self.__cDescription
 
 # Function for Reading the csv file
 def read_file(): 
@@ -139,8 +140,8 @@ manage_data()
 
 
 
-MainOptions = ['List MP information', 'List Constituency information', 'List Party information', 'List Results by constituency']
-
+MainOptions = ['List MP information', 'List Constituency information', 'List Party information', 'List Results by constituency','Search']
+SearchOptions = ['Search for a MP', 'Search for a Constituency', 'Search for a Party']
 # Main Menu
 
 print('\nWelcome to the 2024 General Election Analysis App')
@@ -148,6 +149,7 @@ print('Choose your option - Use the number')
 print('#\t Option')
 
 optionNumber = 0
+searchNumber = 0
 for option in MainOptions:
     print(optionNumber, '\t', option)
     optionNumber += 1
@@ -165,5 +167,21 @@ elif UserInput == 2:
         print(party)
 elif UserInput == 3:
     for mp in MPs:
-        print(f'Constituency: {mp.Get_mpDescription()['Constituency']:<30} Result: {mp.Get_mpDescription()['Result']:<30} Elected: {mp.Get_mpDescription()['Name']:<30}')
+        print(f'Constituency: {mp.Get_mpDescription()['Constituency']:<30} Result: {mp.Get_mpDescription()['Result']:<30} Elected: {mp.Get_mpDescription()['Name']:<30} Votes: {mp.Get_mpDescription()['Votes']:<30}')
+elif UserInput == 4:    
+    for searchOption in SearchOptions:
+        print(searchNumber ,'\t', searchOption)
+        searchNumber += 1
     
+    UserInput = int(input('\nEnter your choice: '))
+    
+    if UserInput == 0:
+        UserSearch = input('Enter MP Name: ')
+        for mp in MPs:
+            if UserSearch in mp.Get_mpDescription()['Name']:
+                print(mp)
+    elif UserInput == 1:
+        UserSearch = input('Enter Constituency Name: ')
+        for constituency in Constituencies:
+            if UserSearch in constituency.Get_cDescription()['Name']:
+                print(constituency)
