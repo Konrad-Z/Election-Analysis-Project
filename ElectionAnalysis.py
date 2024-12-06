@@ -76,17 +76,18 @@ class MP:
     
 class Constituency:
     '''Constituency class'''
-    def __init__(self,name,region,country,type,electorate,mp):
+    def __init__(self,name,region,country,type,electorate,mp,party):
         self.__cName = name
         self.__cRegion = region
         self.__cCountry = country
         self.__cType = type
         self.__cElectorate = electorate
         self.__cMP = mp
-        self.__cDescription = {'Name': self.__cName, 'Region': self.__cRegion,'Country':self.__cCountry,'Type': self.__cType, 'Electorate': self.__cElectorate, 'Elected MP': self.__cMP}
+        self.__cParty = party
+        self.__cDescription = {'Name': self.__cName, 'Region': self.__cRegion,'Country':self.__cCountry,'Type': self.__cType, 'Electorate': self.__cElectorate, 'Elected MP': self.__cMP, 'Elected Party': self.__cParty}
         
     def __str__(self):
-        return f'Constituency name: {self.__cDescription['Name']:<40} Region: {self.__cDescription['Region']:<30} Country: {self.__cDescription['Country']:25} Type: {self.__cDescription['Type']:<20} Electorate: {self.__cDescription['Electorate']:<20} Elected MP: {self.__cDescription['Elected MP']:<25}'
+        return f'Constituency name: {self.__cDescription['Name']:<40} Region: {self.__cDescription['Region']:<30} Country: {self.__cDescription['Country']:25} Type: {self.__cDescription['Type']:<20} Electorate: {self.__cDescription['Electorate']:<20} Elected MP: {self.__cDescription['Elected MP']:<25} Elected Party: {self.__cDescription['Elected Party']:<25}'
     
     # Getters
     def Get_cName(self):
@@ -117,7 +118,7 @@ def manage_data():
         
         # Setting MP information
         mpObject = MP(firstname=row['Member first name'],surname=row['Member surname'],gender=row['Member gender'],constituency=row['Constituency name'],party=row['First party'],result=row['Result'])
-        constituency = Constituency(name = row['Constituency name'],region=row['Region name'],country=row['Country name'],type=row['Constituency type'],electorate=row['Electorate'],mp=row['Member first name'] + ' ' + row['Member surname'])
+        constituency = Constituency(name = row['Constituency name'],region=row['Region name'],country=row['Country name'],type=row['Constituency type'],electorate=row['Electorate'],mp=row['Member first name'] + ' ' + row['Member surname'], party=row['First party'])
         if party == 'Ind' or party == 'TUV' or party == 'Spk':
             mpObject.SetVotingData(row['Electorate'],row['Of which other winner'],row['Majority'],row['Valid votes'])
         else:
@@ -141,7 +142,7 @@ manage_data()
 
 
 
-MainOptions = ['List MP information', 'List Constituency information', 'List Party information', 'List Results by constituency','Search']
+MainOptions = ['List MP information', 'List Constituency information', 'List Party information', 'List Results by constituency','Search','Display Unformatted CSV Data']
 SearchOptions = ['Search for a MP', 'Search for a Constituency', 'Search for a Party']
 # Main Menu
 
@@ -186,3 +187,19 @@ elif UserInput == 4:
         for constituency in Constituencies:
             if UserSearch in constituency.Get_cDescription()['Name']:
                 print(constituency)
+    elif UserInput == 2:
+        UserSearch = input('Enter Party Name: ').title()
+        for party in Parties:
+            if UserSearch == party.Get_pName():
+                print(party)
+                UserInput = input('\nWould You like to display party members? (y/n)').lower()
+                if UserInput == 'y':
+                    for mp in MPs:
+                        if UserSearch == mp.Get_mpParty():
+                            print(mp)
+elif UserInput == 5:    
+    csvfile = read_file()
+    for row in csvfile:
+        print(row)
+    
+       
