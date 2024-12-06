@@ -141,65 +141,72 @@ def manage_data():
 manage_data()
 
 
+def main():
+    MainOptions = ['List MP information', 'List Constituency information', 'List Party information', 'List Results by constituency','Search','Display Unformatted CSV Data']
+    SearchOptions = ['Search for a MP', 'Search for a Constituency', 'Search for a Party']
+    # Main Menu
 
-MainOptions = ['List MP information', 'List Constituency information', 'List Party information', 'List Results by constituency','Search','Display Unformatted CSV Data']
-SearchOptions = ['Search for a MP', 'Search for a Constituency', 'Search for a Party']
-# Main Menu
+    print('\nWelcome to the 2024 General Election Analysis App')
+    print('Choose your option - Use the number')
+    print('#\t Option')
 
-print('\nWelcome to the 2024 General Election Analysis App')
-print('Choose your option - Use the number')
-print('#\t Option')
+    optionNumber = 0
+    searchNumber = 0
+    for option in MainOptions:
+        print(optionNumber, '\t', option)
+        optionNumber += 1
 
-optionNumber = 0
-searchNumber = 0
-for option in MainOptions:
-    print(optionNumber, '\t', option)
-    optionNumber += 1
+    while True:
+        try:
+            UserInput = int(input('\nEnter your choice: '))
+            break
+        except:
+            print('Value Must be Numeric')
+            
+      
 
-UserInput = int(input('\nEnter your choice: '))
-
-if UserInput == 0:
-    for mp in MPs:
-        print(mp)
-elif UserInput == 1:
-    for constituency in Constituencies:
-        print(constituency)
-elif UserInput == 2:
-    for party in Parties:
-        print(party)
-elif UserInput == 3:
-    for mp in MPs:
-        print(f'Constituency: {mp.Get_mpDescription()['Constituency']:<30} Result: {mp.Get_mpDescription()['Result']:<30} Elected: {mp.Get_mpDescription()['Name']:<30} Votes: {mp.Get_mpDescription()['Votes']:<30}')
-elif UserInput == 4:    
-    for searchOption in SearchOptions:
-        print(searchNumber ,'\t', searchOption)
-        searchNumber += 1
-    
-    UserInput = int(input('\nEnter your choice: '))
-    
     if UserInput == 0:
-        UserSearch = input('Enter MP Name: ')
         for mp in MPs:
-            if UserSearch in mp.Get_mpDescription()['Name']:
-                print(mp)
+            print(mp)
     elif UserInput == 1:
-        UserSearch = input('Enter Constituency Name: ')
         for constituency in Constituencies:
-            if UserSearch in constituency.Get_cDescription()['Name']:
-                print(constituency)
+            print(constituency)
     elif UserInput == 2:
-        UserSearch = input('Enter Party Name: ').title()
         for party in Parties:
-            if UserSearch == party.Get_pName():
-                print(party)
-                UserInput = input('\nWould You like to display party members? (y/n)').lower()
-                if UserInput == 'y':
-                    for mp in MPs:
-                        if UserSearch == mp.Get_mpParty():
-                            print(mp)
-elif UserInput == 5:    
-    csvfile = read_file()
-    for row in csvfile:
-        print(row)
+            print(party)
+    elif UserInput == 3:
+        for mp in MPs:
+            print(f'Constituency: {mp.Get_mpDescription()['Constituency']:<30} Result: {mp.Get_mpDescription()['Result']:<30} Elected: {mp.Get_mpDescription()['Name']:<30} Votes: {mp.Get_mpDescription()['Votes']:<30}')
+    elif UserInput == 4:    
+        for searchOption in SearchOptions:
+            print(searchNumber ,'\t', searchOption)
+            searchNumber += 1
+        
+        UserInput = int(input('\nEnter your choice: '))
+        
+        if UserInput == 0:
+            UserSearch = input('Enter MP Name: ')
+            for mp in MPs:
+                if UserSearch in mp.Get_mpDescription()['Name']:
+                    print(mp)
+        elif UserInput == 1:
+            UserSearch = input('Enter Constituency Name: ')
+            for constituency in Constituencies:
+                if UserSearch in constituency.Get_cDescription()['Name']:
+                    print(constituency)
+        elif UserInput == 2:
+            UserSearch = input('Enter Party Name: ').title()
+            for party in Parties:
+                if UserSearch == party.Get_pName():
+                    print(party)
+                    UserInput = input('\nWould You like to display party members? (y/n)').lower()
+                    if UserInput == 'y':
+                        for mp in MPs:
+                            if UserSearch == mp.Get_mpParty():
+                                print(mp)
+    elif UserInput == 5:    
+        csvfile = read_file()
+        for row in csvfile:
+            print(row)
     
-       
+main()
