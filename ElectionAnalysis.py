@@ -15,11 +15,11 @@ PartyNames = [] # Temp List to get unique parties
 class Party:
     '''Party class'''
     
-    
-    def __init__(self,name):
+    # Constructors
+    def __init__(self,name): # Invoked when an object is created
         self.__pDescription = {'Name':name, 'Members':0,'Votes':0}
     
-    def __str__(self):
+    def __str__(self): #Invoed when printing the object
         return f'Name: {self.__pDescription['Name']:<30} Members: {self.__pDescription['Members']:<30} Votes: {self.__pDescription['Votes']:<30}'
     
     # Methods to increment party members and party votes for the party (Setters)
@@ -38,7 +38,7 @@ class Party:
 
 class MP:
     '''Member of Parliament class'''
-    def __init__(self,firstname,surname,constituency,gender,party,result):   
+    def __init__(self,firstname,surname,constituency,gender,party,result): # Invoked when an object is created    
         self.__mpFirstname = firstname
         self.__mpSurname = surname
         self.__mpConstituency = constituency
@@ -47,7 +47,7 @@ class MP:
         self.__mpResult = result
         self.__mpDescription = {'Name': self.__mpFirstname + ' ' + self.__mpSurname, 'Constituency': self.__mpConstituency, 'Gender': self.__mpGender, 'Party': self.__mpParty,'Result': self.__mpResult, 'Votes': 0,'Electorate': 0, 'Majority':0, 'Valid Votes': 0, 'Percentage of Votes':0}
 
-    def __str__(self):
+    def __str__(self) :#Invoed when printing the object
         return f'Name: {self.__mpDescription['Name']:<30} Gender: {self.__mpDescription['Gender']:<20} Constituency: {self.__mpDescription['Constituency']:<40} Party: {self.__mpDescription['Party']:<10} Votes: {self.__mpDescription['Votes']:<10} Valid Total Votes cast: {self.__mpDescription['Valid Votes']:<10} Majority: {self.__mpDescription['Majority']:<10} % of Votes: {self.__mpDescription['Percentage of Votes']:.2f}'
 
     # Methods to set the voting data for the mp (Setters)
@@ -78,7 +78,7 @@ class MP:
     
 class Constituency:
     '''Constituency class'''
-    def __init__(self,name,region,country,type,electorate,mp,party):
+    def __init__(self,name,region,country,type,electorate,mp,party): #Invoed when creating an object is created
         self.__cName = name
         self.__cRegion = region
         self.__cCountry = country
@@ -88,7 +88,7 @@ class Constituency:
         self.__cParty = party
         self.__cDescription = {'Name': self.__cName, 'Region': self.__cRegion,'Country':self.__cCountry,'Type': self.__cType, 'Electorate': self.__cElectorate, 'Elected MP': self.__cMP, 'Elected Party': self.__cParty}
         
-    def __str__(self):
+    def __str__(self): #Invoed when printing the object
         return f'Constituency name: {self.__cDescription['Name']:<40} Region: {self.__cDescription['Region']:<30} Country: {self.__cDescription['Country']:25} Type: {self.__cDescription['Type']:<20} Electorate: {self.__cDescription['Electorate']:<20} Elected MP: {self.__cDescription['Elected MP']:<25} Elected Party: {self.__cDescription['Elected Party']:<25}'
     
     # Getters
@@ -113,21 +113,25 @@ def read_file():
 
 # Function for importing all the data from the csv into my classes as objects
 def manage_data():
-    csvfile = read_file()
+    csvfile = read_file() # Reads the file
     for row in csvfile:
-        
         party = row['First party']
         
-        # Setting MP information
+        # Setting MP and constituency information
         mpObject = MP(firstname=row['Member first name'],surname=row['Member surname'],gender=row['Member gender'],constituency=row['Constituency name'],party=row['First party'],result=row['Result'])
         constituency = Constituency(name = row['Constituency name'],region=row['Region name'],country=row['Country name'],type=row['Constituency type'],electorate=row['Electorate'],mp=row['Member first name'] + ' ' + row['Member surname'], party=row['First party'])
+        
+        #Checking for special parties, Independant MPs will each have their own votes, TUV is a new party currently listed like IND, SPK is not opposed
         if party == 'Ind' or party == 'TUV' or party == 'Spk':
             mpObject.SetVotingData(row['Electorate'],row['Of which other winner'],row['Majority'],row['Valid votes'])
         else:
             mpObject.SetVotingData(row['Electorate'],row[party],row['Majority'],row['Valid votes'])
+        
+        # Appending each object to it's list
         MPs.append(mpObject)
         Constituencies.append(constituency)
 
+        # getting unique parties and intcrementing their members & setting their votes
         if party not in PartyNames:
             thisParty = Party(party)
             thisParty.IncrementMembers()
@@ -143,11 +147,13 @@ def manage_data():
 manage_data()
 
 
-def main():
+def main(): # Main menu Function
+    
+    # List of options the user main choose
     MainOptions = ['List MP information', 'List Constituency information', 'List Party information', 'List Results by constituency','Search','Display Unformatted CSV Data', 'Quit']
     SearchOptions = ['Search for a MP', 'Search for a Constituency', 'Search for a Party']
-    # Main Menu
-
+    
+    # Displaying the menu
     print('\nWelcome to the 2024 General Election Analysis App')
     print('Choose your option - Use the number')
     print('#\t Option')
@@ -160,11 +166,12 @@ def main():
 
     while True:
         try:
-            UserInput = int(input('\nEnter your choice: '))
+            UserInput = int(input('\nEnter your choice: ')) # Checking User's Choice is a number
             if UserInput < 0 or UserInput > 6:
                 print('Invalid choice')
                 continue
             
+            # Displaying relevant infomation
             if UserInput == 0:
                 for mp in MPs:
                     print(mp)
@@ -177,7 +184,7 @@ def main():
             elif UserInput == 3:
                 for mp in MPs:
                     print(f'Constituency: {mp.Get_mpDescription()['Constituency']:<30} Result: {mp.Get_mpDescription()['Result']:<30} Elected: {mp.Get_mpDescription()['Name']:<30} Votes: {mp.Get_mpDescription()['Votes']:<30}')
-            elif UserInput == 4:    
+            elif UserInput == 4:  # Allowing the user to seach through the data  
                 for searchOption in SearchOptions:
                     print(searchNumber ,'\t', searchOption)
                     searchNumber += 1
@@ -185,30 +192,30 @@ def main():
                 UserInput = int(input('\nEnter your choice: '))
         
                 if UserInput == 0:
-                    UserSearch = input('Enter MP Name: ')
+                    UserSearch = input('Enter MP Name: ').title() # Searching for MPs
                     for mp in MPs:
                         if UserSearch in mp.Get_mpDescription()['Name']:
                             print(mp)
                 elif UserInput == 1:
-                    UserSearch = input('Enter Constituency Name: ')
+                    UserSearch = input('Enter Constituency Name: ').title() # Searching for constituencies
                     for constituency in Constituencies:
                         if UserSearch in constituency.Get_cDescription()['Name']:
                             print(constituency)
                 elif UserInput == 2:
-                    UserSearch = input('Enter Party Name: ').title()
+                    UserSearch = input('Enter Party Name: ').title() # Searching for Parties
                     for party in Parties:
-                        if UserSearch == party.Get_pName():
+                        if UserSearch in party.Get_pName():
                             print(party)
-                            UserInput = input('\nWould You like to display party members? (y/n)').lower()
-                            if UserInput == 'y':
-                                for mp in MPs:
-                                    if UserSearch == mp.Get_mpParty():
-                                        print(mp)
-            elif UserInput == 5:    
+                    UserInput = input('\nWould You like to display party members? (y/n)').lower() # Displaying Party MPs based on user search
+                    if UserInput == 'y':
+                        for mp in MPs:
+                            if UserSearch in mp.Get_mpParty():
+                                print(mp)        
+            elif UserInput == 5:        # Displaying unformatted file   
                 csvfile = read_file()
                 for row in csvfile:
                     print(row)
-            elif UserInput == 6:    
+            elif UserInput == 6:    # Quitting the program
                 break
             
             main()
