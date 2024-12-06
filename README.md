@@ -16,7 +16,7 @@ Objective:
 
 # User Options
 
-0. List MP Information
+1 List MP Information
     Displays information regarding members of parliament including their Name, Gender, Consituency, Party and voting results
 
 1. List Constituency information
@@ -35,24 +35,3 @@ To Run:
 - Ensure Python 3 or higher is in place
 - Ensure The Data is available and correctly name as 'FullDataFor2024.CSV' 
 
-Example Output:
-
-Welcome to the 2024 General Election Analysis App
-Choose your option - Use the number
-#        Option
-0        List MP information
-1        List Constituency information
-2        List Party information
-3        List Results by constituency
-4        Search
-5        Display Unformatted CSV Data
-6        Quit
-
-Enter your choice: 4
-0        Search for a MP
-1        Search for a Constituency
-2        Search for a Party
-
-Enter your choice: 1
-Enter Constituency Name: Derby North
-Constituency name: Derby North                              Region: East Midlands                  Country: England                   Type: Borough              Electorate: 71879                Elected MP: Catherine Atkinson        Elected Party: Lab
