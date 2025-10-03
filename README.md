@@ -1,7 +1,4 @@
 # ElectionAnalysisProject
-Main Assessment Project
-
-Objective: 
 
 - To Analyse the 2024 General Election
 - Present the Data in suitable format
